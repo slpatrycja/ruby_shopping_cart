@@ -8,10 +8,4 @@ RSpec.describe PromotionalRules::TotalDiscount do
 
     it { is_expected.to eq 80 }
   end
-
-  describe '#discount_multiplier' do
-    subject { rule.discount_multiplier }
-
-    it { is_expected.to eq 0.9 }
-  end
 end

@@ -67,7 +67,7 @@ RSpec.describe Checkout do
     context 'with multiple promotional rules' do
       let(:promotional_rules) { [total_discount, items_batch_discount] }
 
-      it 'returns basket items sum reducing price of items from promotional rule and reduced by discount percentage' do
+      it 'returns basket items sum reduced according to promotional rules in correct order' do
         expect(subject).to eq 73.76
       end
     end

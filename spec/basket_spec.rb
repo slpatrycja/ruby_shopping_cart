@@ -18,9 +18,12 @@ RSpec.describe Basket do
     it { is_expected.to eq [item_001] }
   end
 
-  describe '#base_total' do
-    subject { basket.base_total }
+  describe '#reload_total' do
+    subject { basket.reload_total }
 
-    it { is_expected.to eq 19.00 }
+    it 'assigns proper value to @total' do
+      subject
+      expect(basket.total).to eq 19
+    end
   end
 end

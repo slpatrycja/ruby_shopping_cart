@@ -1,17 +1,18 @@
 # frozen_string_literal: true
 
 class Basket
-  attr_accessor :items
+  attr_accessor :items, :total
 
   def initialize(items: [])
     @items = items
+    @total = nil
   end
 
   def items_by_code(code)
     items.select { |item| item.code == code }
   end
 
-  def base_total
-    @_base_total ||= items.map(&:price).sum(0.00)
+  def reload_total
+    @total = items.map(&:price).sum(0.00)
   end
 end

@@ -9,5 +9,14 @@ module PromotionalRules
       @threshold = threshold
       @discount_price = discount_price
     end
+
+    def apply_to(basket)
+      items_for_discount = basket.items_by_code(item_code)
+      return unless items_for_discount.count <= threshold
+
+      items_for_discount.each { |item| item.price = discount_price }
+
+      basket.reload_total
+    end
   end
 end
