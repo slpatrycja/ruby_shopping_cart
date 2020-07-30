@@ -47,7 +47,7 @@ checkout.scan(item)
 ```
 
 ### Basket
-Basket is an internal representation of items added to the checkout. It should not be used directly.
+Basket is an internal representation of items added to the checkout. It implements two methods: `#items_by_code(code)`, which returns an array of basket items of specific code, and `#reload_total` which is used to reload the basket total price after any changes in the items array have been made.
 
 
 ## Sample usage
