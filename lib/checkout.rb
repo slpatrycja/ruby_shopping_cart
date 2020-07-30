@@ -23,6 +23,8 @@ class Checkout
     @final_basket_value.round(2)
   end
 
+  private
+
   def apply_items_batch_discounts
     promotional_rules.select { |rule| rule.is_a?(PromotionalRules::ItemsBatchDiscount) }.each do |rule|
       items_for_discount = basket.items_by_code(rule.item_code)
