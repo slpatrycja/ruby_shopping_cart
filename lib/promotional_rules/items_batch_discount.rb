@@ -12,7 +12,7 @@ module PromotionalRules
 
     def apply_to(basket)
       items_for_discount = basket.items_by_code(item_code)
-      return unless items_for_discount.count <= threshold
+      return unless items_for_discount.count >= threshold
 
       items_for_discount.each { |item| item.price = discount_price }
 
