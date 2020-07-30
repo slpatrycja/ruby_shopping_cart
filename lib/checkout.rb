@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Checkout
+  class UnsupportedItemType < StandardError; end
+
   attr_reader :promotional_rules, :basket
 
   def initialize(promotional_rules)
@@ -9,6 +11,8 @@ class Checkout
   end
 
   def scan(item)
+    raise UnsupportedItemType unless item.is_a?(Item)
+
     basket.items << item
   end
 

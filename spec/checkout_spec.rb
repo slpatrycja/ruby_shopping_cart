@@ -20,6 +20,12 @@ RSpec.describe Checkout do
 
       expect(checkout.basket.items).to match_array [item_001, item_002]
     end
+
+    context 'unsupported item type' do
+      it 'raises error' do
+        expect { checkout.scan('Not an item') }.to raise_error(Checkout::UnsupportedItemType)
+      end
+    end
   end
 
   describe '#total' do
