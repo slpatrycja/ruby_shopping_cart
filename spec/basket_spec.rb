@@ -17,4 +17,10 @@ RSpec.describe Basket do
 
     it { is_expected.to eq [item_001] }
   end
+
+  describe '#base_total' do
+    subject { basket.base_total }
+
+    it { is_expected.to eq 19.00 }
+  end
 end

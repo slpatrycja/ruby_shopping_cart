@@ -10,4 +10,8 @@ class Basket
   def items_by_code(code)
     items.select { |item| item.code == code }
   end
+
+  def base_total
+    @_base_total ||= items.map(&:price).sum(0.00)
+  end
 end

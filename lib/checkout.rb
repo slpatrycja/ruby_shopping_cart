@@ -20,22 +20,24 @@ class Checkout
     apply_items_batch_discounts
     apply_total_discounts
 
-    @basket_total.round(2)
+    @final_basket_value.round(2)
   end
 
   def apply_items_batch_discounts
     promotional_rules.select { |rule| rule.is_a?(PromotionalRules::ItemsBatchDiscount) }.each do |rule|
-      if basket.items_by_code(rule.item_code).count <= rule.threshold
-        basket.items_by_code(rule.item_code).each { |item| item.price = rule.discount_price }
+      items_for_discount = basket.items_by_code(rule.item_code)
+
+      if items_for_discount.count <= rule.threshold
+        items_for_discount.each { |item| item.price = rule.discount_price }
       end
     end
   end
 
   def apply_total_discounts
-    @basket_total = basket.items.map(&:price).sum(0.00)
+    @final_basket_value = basket.base_total
 
     promotional_rules.select { |rule| rule.is_a?(PromotionalRules::TotalDiscount) }.each do |rule|
-      @basket_total *= rule.discount_multiplier if @basket_total > rule.threshold
+      @final_basket_value *= rule.discount_multiplier if @final_basket_value > rule.threshold
     end
   end
 end
